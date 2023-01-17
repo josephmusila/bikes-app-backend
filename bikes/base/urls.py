@@ -14,5 +14,12 @@ urlpatterns=[
     path("bikes/search/<search>",views.SearchBike.as_view(),name="search"),
 
     
-    path("repairs",views.RepairServicesView.as_view(),name="repairs")
+    path("repairs",views.RepairServicesView.as_view(),name="repairs"),
+
+
+     # register, confirmation, validation and callback urls
+    path('submit/', views.SubmitView.as_view(), name='submit'),
+    path('confirm/', views.ConfirmView.as_view(), name='confirm'),
+    path('check-online/', views.CheckTransactionOnline.as_view(), name='confirm-online'),
+    path('check-transaction/', views.CheckTransaction.as_view(), name='check_transaction'),
 ]

@@ -42,7 +42,7 @@ class BikeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Bike
-        fields = ("owner", "name", "description", "price", "image")
+        fields = ("id","owner", "name", "description", "price", "image")
         depth = 2
 
     def to_representation(self, instance):

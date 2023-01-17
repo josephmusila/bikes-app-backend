@@ -19,6 +19,15 @@ class BikeAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+class PaymentTransactionAdmin(admin.ModelAdmin):
+    list_display = ("phone_number", "amount", "is_finished",
+                    "is_successful","bike", "trans_id", 'date_created', 'date_modified')
+
+
+admin.site.register(models.PaymentTransaction, PaymentTransactionAdmin)
+admin.site.register(models.Wallet)
+
 
 admin.site.register(models.User,UserAdmin),
-admin.site.register(models.Bike,BikeAdmin)
+admin.site.register(models.Bike,BikeAdmin),
+# admin.site.register(models.)
