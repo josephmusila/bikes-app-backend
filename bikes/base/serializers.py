@@ -70,7 +70,7 @@ class RentalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rentals
         fields = ('id', "customer", "owner","bike", "date_of_renting",
-                  "rent_status", "date_of_return", "paid")
+                "date_of_return", "paid")
         depth = 2
 
     def to_representation(self, instance):
@@ -78,6 +78,10 @@ class RentalSerializer(serializers.ModelSerializer):
         response['bike'] = BikeSerializer(instance.bike).data
         response['client'] = UserSerializer(instance.customer).data
         return response
+
+    def get_profile_picture_url(self, obj):
+        request = self.context['request']
+        return request.build_absolute_uri(settings.MEDIA_URL + obj['bike_image'])
 
 
 class RepairServiceSerializer(serializers.ModelSerializer):

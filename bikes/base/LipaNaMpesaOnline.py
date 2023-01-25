@@ -97,7 +97,8 @@ def sendSTK(bike,phone_number, amount, orderId=0, transaction_id=None, shortcode
                 transaction.save()
                 return transaction.id
     else:
-        raise Exception("Error sending MPesa stk push", json_response)
+        return response({"Error sending MPesa stk push":json_response})
+        # raise Exception("Error sending MPesa stk push", json_response)
 
 
 def check_payment_status(checkout_request_id, shortcode=None):

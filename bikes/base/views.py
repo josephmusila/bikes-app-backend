@@ -124,16 +124,16 @@ class RentalsView(generics.ListAPIView):
 
 
     def get(self, request, *args, **kwargs):
-        # print( kwargs['search'])
-        # AddBike.queryset=Bike.objects.filter(Q(location__icontains=kwargs['search']))
-        RentalsView.queryset=Rentals.objects.all()
+        print( kwargs['id'])
+        RentalsView.queryset=Rentals.objects.filter(Q(customer__id=kwargs['id']))
+        # RentalsView.queryset=Rentals.objects.all()
         # data=self.serializer_class(data=data)                                         
         
         return self.list(request={"request":request}, *args, **kwargs) 
 
-    def getData(request,self):
-        info = self.post(self,request)
-        return info
+    # def getData(request,self):
+    #     info = self.post(self,request)
+    #     return info
 
 class RepairServicesView(views.APIView):
     serializer_class=user_serializer.RepairServiceSerializer
@@ -158,10 +158,13 @@ class RepairServicesView(views.APIView):
 class SearchBike(generics.ListAPIView):
     serializer_class=user_serializer.BikeSerializer
     queryset=Bike.objects.all()
-    allowed_methods=["POST","GET"]
+    # allowed_methods=["POST","GET"]
 
     def get(self, request, *args, **kwargs):
-        SearchBike.queryset=Bike.objects.filter(Q(name__icontains=kwargs['search']))
+        SearchBike.queryset=Bike.objects.filter(Q(name__icontains=kwargs['search']) |
+                                                Q(owner__location__icontains=kwargs["search"]) |
+                                                Q(description__icontains=kwargs["search"])
+        )
         return self.list(request, *args, **kwargs)
 
 class GetLocations(views.APIView):

@@ -11,6 +11,7 @@ urlpatterns=[
 
 
     path("rentals/new",views.RentalsView.as_view(),name="new_rentals"),
+    path("rentals/history/<id>",views.RentalsView.as_view(),name="customer_rentals"),
     path("bikes/search/<search>",views.SearchBike.as_view(),name="search"),
 
     

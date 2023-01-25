@@ -71,6 +71,9 @@ class Bike(models.Model):
     owner=models.ForeignKey(User,on_delete=models.DO_NOTHING)
     rent_status=models.CharField(max_length=100)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 
 class Rentals(models.Model):
